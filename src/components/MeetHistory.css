@@ -1,0 +1,35 @@
+.meet-history-container {
+    margin-top: 10px;
+    padding: 10px 50px;
+}
+
+.meet-history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.meet-history-table th,
+.meet-history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.meet-history-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.meet-history-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.meet-history-table tr:hover {
+    background-color: #ddd;
+}
+
+@media screen and (max-width: 770px) {
+    .meet-history-container {
+        padding: 0px;
+        font-size: small !important;
+    }
+}
