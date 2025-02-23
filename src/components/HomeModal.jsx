@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import LoadingSpinner from './LoadingSpinner';
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomeModal({ title, onClose }) {
     const [isLoading, setIsLoading] = useState(false);
+    const [meetingName, setMeetingName] = useState("");
+    const [transcript, setTranscript] = useState("");
+    const navigate = useNavigate();
+
     const handleClick = () => {
-        // add a loading spinner here
-        setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-            openLink();
-        }, 3000);
+        if (title === "add") {
+            const submissionDate = new Date().toLocaleString();
+            const meetingData = {
+                meetingName,
+                transcript,
+                date: submissionDate,
+            };
+
+            // Save meeting data to local storage
+            localStorage.setItem("meetingData", JSON.stringify(meetingData));
+
+            // Navigate to the MeetingContent page
+            navigate("/meeting-content");
+        } else {
+            setIsLoading(true);
+            setTimeout(() => {
+                setIsLoading(false);
+                openLink();
+            }, 3000);
+        }
     };
 
     const openLink = () => {
@@ -77,7 +95,6 @@ function HomeModal({ title, onClose }) {
                                 Kindly wait for the bot to join the meeting.
                             </p>
                         </div>
-
                     ) : (
                         <div className="mt-4 items-center">
                             <p className="mt-4 text-gray-600">
@@ -88,6 +105,8 @@ function HomeModal({ title, onClose }) {
                                 <input
                                     type="text"
                                     name="meetName"
+                                    value={meetingName}
+                                    onChange={(e) => setMeetingName(e.target.value)}
                                     placeholder="Enter Meeting Name"
                                     className="border border-gray-400 rounded-lg p-2 w-full"
                                 />
@@ -95,6 +114,8 @@ function HomeModal({ title, onClose }) {
                                 <textarea  
                                     placeholder="Enter Transcript"
                                     name="transcript"
+                                    value={transcript}
+                                    onChange={(e) => setTranscript(e.target.value)}
                                     className="border border-gray-400 rounded-lg p-2 w-full"
                                 />
                             </form>
@@ -111,18 +132,15 @@ function HomeModal({ title, onClose }) {
                                 The transcript will be processed and you will be redirected to the summary with key insights.
                             </p>
                         </div>
-
-
                     )}
                     <div className="mt-4 flex justify-end">
                         <button
                             onClick={handleClick}
                             className="bg-[#06508e] text-white px-4 py-2 rounded-lg hover:text-white hover:bg-[#054072] transition duration-300"
                         >
-                            {title === "create" ? "Start Meeting" : title === "join" ? "Join Meeting" : "Get Transcript"}
+                            {title === "create" ? "Start Meeting" : title === "join" ? "Join Meeting" : "Process Transcript"}
                             <ArrowRight size={20} className="inline ml-2" />
                         </button>
-
                     </div>
                 </div>
             )}
