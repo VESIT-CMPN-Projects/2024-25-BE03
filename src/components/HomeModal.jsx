@@ -2,12 +2,52 @@ import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import LoadingSpinner from './LoadingSpinner';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function HomeModal({ title, onClose }) {
     const [isLoading, setIsLoading] = useState(false);
     const [meetingName, setMeetingName] = useState("");
+    const [meetUrl, setMeetUrl] = useState("");
     const [transcript, setTranscript] = useState("");
     const navigate = useNavigate();
+
+    const handleJoinMeet = async () => {
+        if (!meetUrl) {
+            alert("Please enter a valid Google Meet link.");
+            return;
+        }
+
+        setIsLoading(true);
+
+        try {
+            const response = await axios.post(`${API_URL}/create_bot`, {
+                "meeting_url": meetUrl,
+                "bot_name": "CareerLens",
+                "user_id": "piyushchugeja"
+            });
+
+            if (response.status === 201) {
+                const { bot_id, meeting_id } = response.data;
+
+                localStorage.setItem("bot_id", bot_id);
+                localStorage.setItem("meeting_id", meeting_id);
+
+                setIsLoading(false);
+                alert("Bot joined the meeting successfully. Navigating to the meeting page.");
+                navigate("/ongoing");
+            } else {
+                alert("An error occurred. Please try again. Response not 201.");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("An error occurred. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
 
     const handleClick = () => {
         if (title === "add") {
@@ -23,6 +63,8 @@ function HomeModal({ title, onClose }) {
 
             // Navigate to the MeetingContent page
             navigate("/meeting-content");
+        } else if (title === "join") {
+            handleJoinMeet();
         } else {
             setIsLoading(true);
             setTimeout(() => {
@@ -35,10 +77,6 @@ function HomeModal({ title, onClose }) {
     const openLink = () => {
         if (title === "create") {
             window.open("https://meet.google.com/new", "_blank");
-        } else if (title === "join") {
-            window.open("https://meet.google.com/", "_blank");
-        } else {
-            window.open("https://www.rev.com/blog/resources/transcription-services", "_blank");
         }
     }
 
@@ -89,6 +127,8 @@ function HomeModal({ title, onClose }) {
                                     type="text"
                                     placeholder="Enter Google Meet Link"
                                     className="border border-gray-400 rounded-lg p-2 w-full"
+                                    value={meetUrl}
+                                    onChange={(e) => setMeetUrl(e.target.value)}
                                 />
                             </form>
                             <p className="mt-4">
@@ -111,7 +151,7 @@ function HomeModal({ title, onClose }) {
                                     className="border border-gray-400 rounded-lg p-2 w-full"
                                 />
                                 <label htmlFor="transcript" className="text-sm">Transcript</label>
-                                <textarea  
+                                <textarea
                                     placeholder="Enter Transcript"
                                     name="transcript"
                                     value={transcript}
