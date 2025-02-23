@@ -1,0 +1,11 @@
+.heading{
+    text-align: center;
+    margin-left: -350px;
+}
+
+@media screen and (max-width: 770px) {
+    .heading {
+        text-align: center;
+        margin-left: 0px;
+    }
+}

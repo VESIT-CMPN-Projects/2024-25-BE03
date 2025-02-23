@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PlusSquare, Calendar, Share2, Settings, Archive } from "lucide-react";
+import { PlusSquare, Calendar, PhoneOutgoing, Settings, Archive } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 // import app.css
 import "../app.css";
@@ -79,9 +79,9 @@ function SideBar() {
           <div className="relative flex flex-col">
             <div
               className={`hover:bg-[#F5F2FE] focus:bg-[#F5F2FE] cursor-pointer pointer-events-auto p-3 rounded-lg flex items-center gap-3 ${
-                isActive("/add-meeting") ? "bg-[#F5F2FE]" : ""
+                isActive("/") ? "bg-[#F5F2FE]" : ""
               }`}
-              onClick={() => navigate("/add-meeting")}
+              onClick={() => navigate("/")}
             >
               <PlusSquare size={20} />
               <span>Add a Meeting</span>
@@ -95,18 +95,22 @@ function SideBar() {
               <Calendar size={20} />
               <span>My Meetings</span>
             </div>
-            <div className="hover:bg-[#F5F2FE] focus:bg-[#F5F2FE] cursor-pointer pointer-events-auto p-3 rounded-lg flex items-center gap-3">
-              <Share2 size={20} />
-              <span>Shared with Me</span>
+            <div className={`hover:bg-[#F5F2FE] focus:bg-[#F5F2FE] cursor-pointer pointer-events-auto p-3 rounded-lg flex items-center gap-3 ${
+                isActive("/ongoing") ? "bg-[#F5F2FE]" : ""
+              }`}
+              onClick={() => navigate("/ongoing")}
+            >
+              <PhoneOutgoing size={20} />
+              <span>Ongoing Meet</span>
             </div>
             <div className="hover:bg-[#F5F2FE] focus:bg-[#F5F2FE] cursor-pointer pointer-events-auto p-3 rounded-lg flex items-center gap-3">
               <Settings size={20} />
               <span>Account & Settings</span>
             </div>
-            <div className="hover:bg-[#F5F2FE] focus:bg-[#F5F2FE] cursor-pointer pointer-events-auto p-3 rounded-lg flex items-center gap-3">
+            {/* <div className="hover:bg-[#F5F2FE] focus:bg-[#F5F2FE] cursor-pointer pointer-events-auto p-3 rounded-lg flex items-center gap-3">
               <Archive size={20} />
               <span>Archive</span>
-            </div>
+            </div> */}
           </div>
           <hr className="border-zinc-200 mt-5 mb-8" />
         </div>

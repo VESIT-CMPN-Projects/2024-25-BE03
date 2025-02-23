@@ -10,6 +10,7 @@ import AddMeeting from "./components/AddMeeting";
 import MeetingContent from "./components/MeetingContent";
 import ActionItems from "./components/ActionItems";
 import HomePage from "./components/HomePage";
+import OnGoingMeet from "./components/OnGoingMeet";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/add-meeting" element={<AddMeeting />} />
             <Route path="/meeting-content" element={<MeetingContent />} />
             <Route path="/action-items" element={<ActionItems />} />
+            <Route path="/ongoing" element={<OnGoingMeet status={1}/>} />
             {/* <Route path="*" element={<Navigate to="/add-meeting" />} /> */}
           </Routes>
         </div>
