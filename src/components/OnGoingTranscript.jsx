@@ -1,36 +1,35 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
-const OnGoingTranscript = () => {
-    const transcriptData = [
-        { speaker: 'Alice', text: 'Hello, how are you?' },
-        { speaker: 'Bob', text: 'I am good, thank you! How about you?' },
-        { speaker: 'Alice', text: 'I am doing well, thanks for asking.' },
-        { speaker: 'Bob', text: 'Great to hear!' },
-        { speaker: 'Alice', text: 'Hello, how are you?' },
-        { speaker: 'Bob', text: 'I am good, thank you! How about you?' },
-        { speaker: 'Alice', text: 'I am doing well, thanks for asking.' },
-        { speaker: 'Bob', text: 'Great to hear!' }, { speaker: 'Alice', text: 'Hello, how are you?' },
-        { speaker: 'Bob', text: 'I am good, thank you! How about you?' },
-        { speaker: 'Alice', text: 'I am doing well, thanks for asking.' },
-        { speaker: 'Bob', text: 'Great to hear!' }, { speaker: 'Alice', text: 'Hello, how are you?' },
-        { speaker: 'Bob', text: 'I am good, thank you! How about you?' },
-        { speaker: 'Alice', text: 'I am doing well, thanks for asking.' },
-        { speaker: 'Bob', text: 'Great to hear!' }, { speaker: 'Alice', text: 'Hello, how are you?' },
-        { speaker: 'Bob', text: 'I am good, thank you! How about you?' },
-        { speaker: 'Alice', text: 'I am doing well, thanks for asking.' },
-        { speaker: 'Bob', text: 'Great to hear!' }, { speaker: 'Alice', text: 'Hello, how are you?' },
-        { speaker: 'Bob', text: 'I am good, thank you! How about you?' },
-        { speaker: 'Alice', text: 'I am doing well, thanks for asking.' },
-        { speaker: 'Bob', text: 'Great to hear!' },
-    ];
+const API_URL = import.meta.env.VITE_API_URL;
+
+const OnGoingTranscript = ({ botId }) => {
+    const [transcriptData, setTranscriptData] = useState([]);
+
+    function fetchTranscript() {
+        try {
+            fetch(`${API_URL}/get_transcript?bot_id=${botId}`)
+                .then(response => response.json())
+                .then(data => setTranscriptData(data.transcript))
+                .catch(error => console.error('Error fetching transcript:', error));
+        } catch (error) {
+            console.error('Error fetching transcript:', error);
+            alert('Failed to fetch the transcript.');
+        }
+    }
 
     return (
         <div className="p-4 h-[50vh] overflow-y-auto">
-            {transcriptData.map((line, index) => (
+            <button onClick={fetchTranscript}>Fetch Transcript</button>
+            {transcriptData ? (transcriptData.map((line, index) => (
                 <div key={index} className="mb-2">
-                    <strong>{line.speaker}:</strong> {line.text}
+                    <strong>{line.speaker_name}:</strong> {line.text}
                 </div>
-            ))}
+            ))) : (
+                <p>
+                    No transcript available yet.
+                </p>
+            )}
         </div>
     );
 };

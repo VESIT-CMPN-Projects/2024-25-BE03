@@ -31,7 +31,23 @@ function OnGoingMeet() {
 		try {
 			await axios.post(`${API_URL}/leave_meeting`, { meeting_id: meetingId, bot_id: botId });
 			alert("Meeting ended.");
-			navigate("/");
+			const transcript = await fetch(`${API_URL}/get_formatted_transcript?meeting_id=${meetingId}`)
+				.then(response => response.json())
+				.then(data => data.transcript)
+				.catch(error => console.error("Error fetching transcript:", error));
+
+			const submissionDate = new Date().toLocaleString();
+			const meetingData = {
+				meetingName: `Meeting ${meetingId}`,
+				transcript: transcript,
+				date: submissionDate,
+			};
+
+			// Save meeting data to local storage
+			localStorage.setItem("meetingData", JSON.stringify(meetingData));
+
+			// Navigate to the MeetingContent page
+			navigate("/meeting-content");
 		} catch (error) {
 			console.error(error);
 			alert("Failed to end the meeting.");
@@ -60,7 +76,7 @@ function OnGoingMeet() {
 
 				<OnGoingMeetInfo meetingId={meetingId} botStatus={botStatus} />
 				<hr className="border-gray-300 mt-6" />
-				<OnGoingMeetTab meetingId={meetingId} />
+				<OnGoingMeetTab meetingId={meetingId} botId={botId} />
 
 				<Footer />
 			</div>

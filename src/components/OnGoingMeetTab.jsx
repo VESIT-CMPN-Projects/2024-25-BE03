@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import OnGoingTranscript from "./OnGoingTranscript";
 import OnGoingChat from "./OnGoingChat";
 
-function OnGoingMeetTab({ meetingId }) {
+function OnGoingMeetTab({ meetingId, botId }) {
 	const [activeTab, setActiveTab] = useState("transcript");
 
 	return (
@@ -22,7 +22,7 @@ function OnGoingMeetTab({ meetingId }) {
 				</button>
 			</div>
 			<div>
-				{activeTab === "transcript" && <OnGoingTranscript meetingId={meetingId} />}
+				{activeTab === "transcript" && <OnGoingTranscript botId={botId} />}
 				{activeTab === "chat" && <OnGoingChat meetingId={meetingId} />}
 			</div>
 		</div>

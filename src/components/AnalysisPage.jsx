@@ -83,7 +83,7 @@ function ActionItems() {
 					<div className="flex gap-4 items-center">
 						<ThumbsUp size={20} />
 						<ThumbsDown size={20} />
-						<div className="flex gap-1 items-center">
+						<div className="flex gap-1 items-center" onClick={() => { navigator.clipboard.writeText(action_items.join("\n")); }}>
 							<Copy size={20} />
 							<h1 className="text-sm">Copy</h1>
 						</div>

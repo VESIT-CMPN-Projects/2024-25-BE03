@@ -8,7 +8,7 @@ import {
 import SideBar from "./components/SideBar";
 import AddMeeting from "./components/AddMeeting";
 import MeetingContent from "./components/MeetingContent";
-import ActionItems from "./components/ActionItems";
+import ActionItems from "./components/AnalysisPage";
 import HomePage from "./components/HomePage";
 import OnGoingMeet from "./components/OnGoingMeet";
 

@@ -1,6 +1,6 @@
 .meet-history-container {
     margin-top: 10px;
-    padding: 10px 50px;
+    padding: 10px 0;
 }
 
 .meet-history-table {
@@ -11,7 +11,7 @@
 .meet-history-table th,
 .meet-history-table td {
     border: 1px solid #ddd;
-    padding: 18px;
+    padding: 9px;
 }
 
 .meet-history-table th {
