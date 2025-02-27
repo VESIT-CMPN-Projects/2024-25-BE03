@@ -24,7 +24,6 @@ function App() {
             <Route path="/meeting-content" element={<MeetingContent />} />
             <Route path="/action-items" element={<ActionItems />} />
             <Route path="/ongoing" element={<OnGoingMeet status={1}/>} />
-            {/* <Route path="*" element={<Navigate to="/add-meeting" />} /> */}
           </Routes>
         </div>
       </div>

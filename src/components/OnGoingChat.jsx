@@ -5,9 +5,6 @@ const OnGoingChat = () => {
   const [messages, setMessages] = useState([
     { question: 'What is the project deadline?', answer: 'The deadline is next Friday.' },
     { question: 'Can we extend the deadline?', answer: 'We can discuss it with the team.' },
-    { question: 'Hello bhai', answer: 'hello my boy how are you?' },
-    { question: 'bhai placement nahi hori', answer: 'ahh shit koi nahi.' },
-    { question: 'sojata hu', answer: 'best, Good night bro.' },
   ]);
   const [newMessage, setNewMessage] = useState('');
   

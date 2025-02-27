@@ -84,7 +84,7 @@ function SideBar() {
               onClick={() => navigate("/")}
             >
               <PlusSquare size={20} />
-              <span>Add a Meeting</span>
+              <span>Dashboard</span>
             </div>
             <div
               className={`hover:bg-[#F5F2FE] focus:bg-[#F5F2FE] cursor-pointer pointer-events-auto p-3 rounded-lg flex items-center gap-3 ${
@@ -124,7 +124,7 @@ function SideBar() {
               className="w-10 h-10 rounded-full"
             />
             <div>
-              <h2 className="font-medium">Manraj Singh Virdi</h2>
+              <h2 className="font-medium">User</h2>
               
             </div>
           </div>
