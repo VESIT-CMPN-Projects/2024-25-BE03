@@ -51,7 +51,7 @@ function MeetingContent() {
 		Please provide a JSON response summarizing the following meeting transcription.
 		Return a comprehensible meeting summary, at least three or more key action items, at least three or more insights, and brief speaker information. 
 		Do not hallucinate and make up information, stick to the transcript. Do only as directed.
-		Ensure the "speakers" field includes only names or roles with minimal dialogue details. Return only the JSON output.
+		Ensure the "speakers" field includes only names or roles with minimal dialogue details. Return only the JSON output in the language of the transcript itself.
 
 		### Meeting transcript:
 			${meetingData.transcript} 

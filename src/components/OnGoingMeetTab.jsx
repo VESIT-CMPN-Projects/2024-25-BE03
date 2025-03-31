@@ -23,7 +23,7 @@ function OnGoingMeetTab({ meetingId, botId }) {
 			</div>
 			<div>
 				{activeTab === "transcript" && <OnGoingTranscript botId={botId} />}
-				{activeTab === "chat" && <OnGoingChat meetingId={meetingId} />}
+				{activeTab === "chat" && <OnGoingChat botId={botId} />}
 			</div>
 		</div>
 	);
