@@ -22,6 +22,13 @@ It includes a powerful Attendee Bot that can automatically join meetings and a s
 
 ---
 
+## Project Video 
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=FS94BzPyTb0">
+    <img src="https://img.youtube.com/vi/FS94BzPyTb0/0.jpg" alt="Watch the video" />
+  </a>
+</div>
+
 ## 🗂️ Project Structure
 
 | Module         | Description                                                                 |
